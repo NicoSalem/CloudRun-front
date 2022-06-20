@@ -3,8 +3,12 @@ steps:
 # create the image based on the docekr file
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'us-central1-docker.pkg.dev/groovy-autumn-290918/app1-repo/cloudrun-front-1:tag1', '.']
-images: ['us-central1-docker.pkg.dev/groovy-autumn-290918/app1-repo/cloudrun-front-1:tag1']
 
+# 1.a
+# push to artifact registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'us-central1-docker.pkg.dev/groovy-autumn-290918/app1-repo/cloudrun-front-1:tag1']
+  
 # 2.
 # Deploy cloud run based on the image created in the step above 
 - name: 'gcr.io/cloud-builders/gcloud'
