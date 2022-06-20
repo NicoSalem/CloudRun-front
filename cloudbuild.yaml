@@ -12,12 +12,14 @@ steps:
 # 2.
 # Deploy cloud run based on the image created in the step above 
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'cloudrun-cicd1-front', --no-allow-unauthenticated,
+  args: ['run', 'deploy', 'cloudrun-cicd1-front', --allow-unauthenticated,
    '--image', 'us-central1-docker.pkg.dev/groovy-autumn-290918/app1-repo/cloudrun-front-1:tag1',
    '--region', 'us-central1']
 
-# # 2.a
-# # allow all users 
-# - name: 'gcr.io/cloud-builders/gcloud'
-#   args: ['run', 'services', 'add-iam-policy-binding', 'cloudrun-cicd1-front', 
-#     '--member="allUsers"', '--role="roles/run.invoker"']
+# 2.a
+# You can also use terraform to deploy your Cloud run instance
+- name: 'bash'
+  args: ['terraform', 'init']
+
+- name: 'bash'
+  args: ['terraform', 'apply', '-auto-approve']
