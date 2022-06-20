@@ -1,3 +1,10 @@
+
+provider "google" {
+  project     = "groovy-autumn-290918"
+}
+
+
+
 resource "google_cloud_run_service" "default" {
   name     = "cloudrun-srv"
   location = "us-central1"
@@ -9,4 +16,21 @@ resource "google_cloud_run_service" "default" {
       }
     }
   }
+}
+
+data "google_iam_policy" "noauth" {
+  binding {
+    role = "roles/run.invoker"
+    members = [
+      "allUsers",
+    ]
+  }
+}
+
+resource "google_cloud_run_service_iam_policy" "noauth" {
+  location    = "us-central1"
+  project     = "groovy-autumn-290918"
+  service     = "cloudrun-srv"
+
+  policy_data = data.google_iam_policy.noauth.policy_data
 }
