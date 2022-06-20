@@ -25,5 +25,3 @@ steps:
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   args: ['apply', '-auto-approve']
-  env:
-  - 'PROJECT_ID=groovy-autumn-290918'
