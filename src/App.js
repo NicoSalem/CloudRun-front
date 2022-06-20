@@ -7,6 +7,7 @@ function App() {
   return (
     <div className="App">
       <h1>Hello world</h1>
+      <h1>Is the pipeline live?</h1>
       <button onClick={handleClick}>click me</button>
     </div>
   );
