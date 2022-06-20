@@ -3,8 +3,6 @@ provider "google" {
   project     = "groovy-autumn-290918"
 }
 
-
-
 resource "google_cloud_run_service" "default" {
   name     = "cloudrun-srv"
   location = "us-central1"
