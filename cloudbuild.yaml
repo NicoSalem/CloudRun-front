@@ -20,8 +20,8 @@ steps:
 # You can also use terraform to deploy your Cloud run instance
 - id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
-  args: ['terraform', 'init']
+  args: ['init']
 
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
-  args: ['terraform', 'apply', '-auto-approve']
+  args: ['apply', '-auto-approve']
