@@ -4,13 +4,13 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'us-central1-docker.pkg.dev/groovy-autumn-290918/app1-repo/cloudrun-front-1:tag1', '.']
 
-# 1.a
+# 1.b
 # push to artifact registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'us-central1-docker.pkg.dev/groovy-autumn-290918/app1-repo/cloudrun-front-1:tag1']
 
 # 1.alternative
-# you can also jus use one cloud build command to make the image and push it to artifact registry
+# you can also just use one cloud build command to make the image and push it to artifact registry
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['builds', 'submit', '--region=us-west2', '--tag', 
   'us-central1-docker.pkg.dev/groovy-autumn-290918/app1-repo/cloudrun-front-3-delete:tag1', '.']
