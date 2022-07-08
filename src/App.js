@@ -17,7 +17,7 @@ function App() {
 const handleClick =  async () => {
   console.log(await basicFetch("https://api.kanye.rest/"))
   console.log('this is:');
-  console.log(await basicFetch("http://localhost:3003/j"))
+  console.log(await basicFetch("https://cloudrun-cicd1-back-svuotfutja-uc.a.run.app/j"))
 }
 
 const basicFetch = async (endpoint) => {
