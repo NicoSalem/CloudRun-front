@@ -1,6 +1,16 @@
 
 import './App.css';
 
+function App() {
+  return (
+    <div className="App">
+      <h1>Hello world</h1>
+      <h1>Is the CICD pipeline live???</h1>
+      <button onClick={handleClick}>click me</button>
+    </div>
+  );
+}
+
 /**
  * setting up publish method for pub sub
  */
@@ -27,18 +37,6 @@ import './App.css';
      process.exitCode = 1;
    }
  }
-
-
-function App() {
-  return (
-    <div className="App">
-      <h1>Hello world</h1>
-      <h1>Is the CICD pipeline live???</h1>
-      <button onClick={handleClick}>click me</button>
-    </div>
-  );
-}
-
 
 const handleClick =  async () => {
   console.log(await basicFetch("https://api.kanye.rest/"))
