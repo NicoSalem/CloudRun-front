@@ -12,7 +12,7 @@ steps:
 # 1.alternative
 # you can also just use one cloud build command to make the image and push it to artifact registry
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['builds', 'submit', '--region=us-west2', '--tag', 
+  args: ['builds', 'submit', '--region=us-central1', '--tag', 
   'us-central1-docker.pkg.dev/groovy-autumn-290918/app1-repo/cloudrun-front-1:tag1', '.']
 
 # 2.
@@ -24,10 +24,10 @@ steps:
 
 # 2.a
 # You can also use terraform to deploy your Cloud run instance
-# - id: 'tf init'
-#   name: 'hashicorp/terraform:1.0.0'
-#   args: ['init']
+- id: 'tf init'
+  name: 'hashicorp/terraform:1.0.0'
+  args: ['init']
 
 # - id: 'tf apply'
-#   name: 'hashicorp/terraform:1.0.0'
-#   args: ['apply', '-auto-approve']
+  name: 'hashicorp/terraform:1.0.0'
+  args: ['apply', '-auto-approve']

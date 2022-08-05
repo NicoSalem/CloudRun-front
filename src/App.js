@@ -1,49 +1,50 @@
 
 import './App.css';
+import React, { useEffect, useState } from "react";
+
 
 function App() {
+
+  const [messageList, setMessageList] = useState([])
+  const [dbEntries, setDbEntries] = useState([])
+
+  const handleClick =  async () => {
+    var db = await basicFetch("https://cloudrun-cicd1-back-svuotfutja-uc.a.run.app/db");
+    var msgs = await basicFetch("https://cloudrun-cicd1-back-svuotfutja-ue.a.run.app/pmsgs");
+    console.log(db[0]);
+    console.log(msgs);
+    setMessageList(msgs);
+    setDbEntries(db);
+    console.log(messageList)
+    console.log(dbEntries)
+  }
+
+  const btn_send_pubsub =  async () => {
+    await fetch("https://pubsub.googleapis.com/v1/projects/groovy-autumn-290918/topics/my-first-topic:publish");
+
+  }
+
   return (
     <div className="App">
-      <h1>Hello world</h1>
-      <h1>Is the CICD pipeline live???</h1>
-      <button onClick={handleClick}>click me</button>
+      <h1>Hello from the front end</h1>
+      <button onClick={handleClick}>retrieve db entreis and pub sub messages</button>
+      <br></br><br></br>
+      <button onClick={btn_send_pubsub}>send Pub sub message</button>
+      <h3>Db entries</h3>
+      {dbEntries.map(entry => {
+        return <p> {JSON.stringify(entry)} </p>
+      })}
+      <h3>Pub sub messages</h3>
+      {messageList.map(entry => {
+        return <p> {JSON.stringify(entry)} </p>
+      })}
     </div>
   );
 }
 
-/**
- * setting up publish method for pub sub
- */
- const topicNameOrId = 'projects/groovy-autumn-290918/topics/my-first-topic';
- const data = JSON.stringify({myMessage: 'this is my pubsub message'});
- 
- // Imports the Google Cloud client library
- const {PubSub} = require('@google-cloud/pubsub');
- 
- // Creates a client; cache this for further use
- const pubSubClient = new PubSub();
- 
- async function publishMessage() {
-   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
-   const dataBuffer = Buffer.from(data);
- 
-   try {
-     const messageId = await pubSubClient
-       .topic(topicNameOrId)
-       .publishMessage({data: dataBuffer});
-     console.log(`Message ${messageId} published.`);
-   } catch (error) {
-     console.error(`Received error while publishing: ${error.message}`);
-     process.exitCode = 1;
-   }
- }
+export default App;
 
-const handleClick =  async () => {
-  console.log(await basicFetch("https://api.kanye.rest/"))
-  console.log('this is:');
-  console.log(await basicFetch("https://cloudrun-cicd1-back-svuotfutja-uc.a.run.app/db"))
-  publishMessage();
-}
+
 
 const basicFetch = async (endpoint) => {
   const req = await fetch(endpoint);
@@ -51,8 +52,45 @@ const basicFetch = async (endpoint) => {
   return json;
 }
 
+const basicPost = async (endpoint) => {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer $(gcloud auth application-default print-access-token)' },
+    body: JSON.stringify({
+      "messages": [
+          {
+              "data":  Buffer.from("hello from pubsub2").toString('base64'),
+          }
+      ]
+    })
+  };
+  fetch(endpoint, requestOptions)
+}
 
 
-publishMessage();
-
-export default App;
+/**
+ * setting up publish method for pub sub
+ */
+//  const topicNameOrId = 'projects/groovy-autumn-290918/topics/my-first-topic';
+//  const data = JSON.stringify({myMessage: 'this is my pubsub message'});
+ 
+//  // Imports the Google Cloud client library
+//  const {PubSub} = require('@google-cloud/pubsub');
+ 
+//  // Creates a client; cache this for further use
+//  const pubSubClient = new PubSub();
+ 
+//  async function publishMessage() {
+//    // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
+//    const dataBuffer = Buffer.from(data);
+ 
+//    try {
+//      const messageId = await pubSubClient
+//        .topic(topicNameOrId)
+//        .publishMessage({data: dataBuffer});
+//      console.log(`Message ${messageId} published.`);
+//    } catch (error) {
+//      console.error(`Received error while publishing: ${error.message}`);
+//      process.exitCode = 1;
+//    }
+//  }
