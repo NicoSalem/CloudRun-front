@@ -1,6 +1,7 @@
 
 import './App.css';
 import React, { useEffect, useState } from "react";
+import {Buffer} from 'buffer';
 
 
 function App() {
@@ -20,8 +21,8 @@ function App() {
   }
 
   const btn_send_pubsub =  async () => {
-    await fetch("https://pubsub.googleapis.com/v1/projects/groovy-autumn-290918/topics/my-first-topic:publish");
-
+    await basicPost("https://pubsub.googleapis.com/v1/projects/groovy-autumn-290918/topics/my-first-topic:publish");
+    // await basicPost("https://cloudrun-cicd1-back-svuotfutja-ue.a.run.app/get-pubsub-msgs2");
   }
 
   return (
@@ -55,11 +56,11 @@ const basicFetch = async (endpoint) => {
 const basicPost = async (endpoint) => {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer $(gcloud auth application-default print-access-token)' },
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ya29.A0AVA9y1v2HRwMyz9dSIftdrRajveDlcLVBKq0fkOAAsm9QaTwTXYzf4l0wSMPZfsDldnCN7BY0xXwcwlSv1PlAJiUEPrjoSszbMe1CZRiE1vx6vEDHxQduNkFbeCUuqzLcrFlqhuvcYH9IyziGQm1qgrGNYiRtMg3sY1Ps8cCkpm6veXnECAjinezKDqWzH_7mYz7KbDZUAJ30JOAgqy1fQhAJ6WHof1iCnOaJ-N2NlIT6oJcCrEHnCcS_W_LqsIW3Hn4s-9xpgaCgYKATASATASFQE65dr8jMy-MBQVbQ6-jCwpbZZF_w0273' },
     body: JSON.stringify({
       "messages": [
           {
-              "data":  Buffer.from("hello from pubsub2").toString('base64'),
+              "data":  Buffer.from("hello from react pubsub").toString('base64'),
           }
       ]
     })
