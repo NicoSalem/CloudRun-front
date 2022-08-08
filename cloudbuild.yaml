@@ -15,6 +15,7 @@ steps:
   args: ['builds', 'submit', '--region=us-central1', '--tag', 
   'us-central1-docker.pkg.dev/groovy-autumn-290918/app1-repo/cloudrun-front-1:tag1', '.']
 
+
 # 2.
 # Deploy cloud run based on the image created in the step above 
 - name: 'gcr.io/cloud-builders/gcloud'
