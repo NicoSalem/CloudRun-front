@@ -8,16 +8,20 @@ function App() {
 
   const [messageList, setMessageList] = useState([])
   const [dbEntries, setDbEntries] = useState([])
+  const [redis_messageList, set_redis_messageList] = useState([])
 
   const handleClick =  async () => {
-    var db = await basicFetch("https://cloudrun-cicd1-back-svuotfutja-uc.a.run.app/db");
-    var msgs = await basicFetch("https://cloudrun-cicd1-back-svuotfutja-ue.a.run.app/pmsgs");
-    console.log(db[0]);
-    console.log(msgs);
+    var db = await basicFetch("https://cloud-sql-microservice-svuotfutja-uk.a.run.app/db");
+    var msgs = await basicFetch("https://pubsub-microservice-svuotfutja-uk.a.run.app/pmsgs");
+    var redis_msgs = await basicFetch("https://redis-microservice-svuotfutja-ue.a.run.app/redis-pubsub-msgs");
+
+    console.log(db)
+    console.log(msgs)
+
     setMessageList(msgs);
     setDbEntries(db);
-    console.log(messageList)
-    console.log(dbEntries)
+    set_redis_messageList(redis_msgs);
+    console.log(redis_msgs)
   }
 
   const btn_send_pubsub =  async () => {
@@ -39,6 +43,8 @@ function App() {
       {messageList.map(entry => {
         return <p> {JSON.stringify(entry)} </p>
       })}
+      <h3>Pub sub messages - from REDIS</h3>
+      <p>{ redis_messageList }</p>
     </div>
   );
 }
