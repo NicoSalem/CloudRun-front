@@ -25,7 +25,7 @@ function App() {
   }
 
   const btn_send_pubsub =  async () => {
-    await basicPost("https://pubsub.googleapis.com/v1/projects/groovy-autumn-290918/topics/my-first-topic:publish");
+    await basicPost("https://pubsub-microservice-svuotfutja-uk.a.run.app/send-pubsub-msg-from-backend");
     // await basicPost("https://cloudrun-cicd1-back-svuotfutja-ue.a.run.app/get-pubsub-msgs2");
   }
 
