@@ -59,10 +59,16 @@ const basicFetch = async (endpoint) => {
   return json;
 }
 
+
+// TODO
+// INSTEAD OF POSTING TO PPUBSUB FROM FRONT END POST TO BACKEND AND HAVE BACKEND POST TO PUBSUB.
+// EASIER IN TERMS OF AUTHENTICATION.
+// link https://cloud.google.com/pubsub/docs/publisher#node.js
+
 const basicPost = async (endpoint) => {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ya29.A0AVA9y1v2HRwMyz9dSIftdrRajveDlcLVBKq0fkOAAsm9QaTwTXYzf4l0wSMPZfsDldnCN7BY0xXwcwlSv1PlAJiUEPrjoSszbMe1CZRiE1vx6vEDHxQduNkFbeCUuqzLcrFlqhuvcYH9IyziGQm1qgrGNYiRtMg3sY1Ps8cCkpm6veXnECAjinezKDqWzH_7mYz7KbDZUAJ30JOAgqy1fQhAJ6WHof1iCnOaJ-N2NlIT6oJcCrEHnCcS_W_LqsIW3Hn4s-9xpgaCgYKATASATASFQE65dr8jMy-MBQVbQ6-jCwpbZZF_w0273' },
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ya29.A0AVA9y1s94m5mxAuafgXOva24dIFKLf81_UyCT3E5uWgGQQnM0rj_Rc5-9WZFMIaCe8XT4amfsnXKfNbXz3w9z6K0FzPWk3erXw3IGloinwmQzTyasmkqAuOcKz4GnIRF3-QvPawcxCyH2Pia59OiG7X4aYAkZZxfwNTNZxE6vkje0TsuNKav-_xhKJ35Gl6j2MEhOi-FWZM-RAmC9UdG3-YB8m4zmgzianVG12pOhqTen6vORm53orTPPm7S2-lv6tPr91Yu3QaCgYKATASATASFQE65dr8geXiTGhH2WdteFtCpWdmTw0273' },
     body: JSON.stringify({
       "messages": [
           {
