@@ -68,7 +68,7 @@ const basicFetch = async (endpoint) => {
 const basicPost = async (endpoint) => {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ya29.A0AVA9y1s94m5mxAuafgXOva24dIFKLf81_UyCT3E5uWgGQQnM0rj_Rc5-9WZFMIaCe8XT4amfsnXKfNbXz3w9z6K0FzPWk3erXw3IGloinwmQzTyasmkqAuOcKz4GnIRF3-QvPawcxCyH2Pia59OiG7X4aYAkZZxfwNTNZxE6vkje0TsuNKav-_xhKJ35Gl6j2MEhOi-FWZM-RAmC9UdG3-YB8m4zmgzianVG12pOhqTen6vORm53orTPPm7S2-lv6tPr91Yu3QaCgYKATASATASFQE65dr8geXiTGhH2WdteFtCpWdmTw0273' },
+    headers: { 'Content-Type': 'application/json', 'Authorization': '$(gcloud auth application-default print-access-token)' },
     body: JSON.stringify({
       "messages": [
           {
