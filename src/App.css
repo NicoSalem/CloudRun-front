@@ -1,0 +1,65 @@
+.introduction{
+    text-align: center;  
+}
+
+.mainSection{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.left{
+    width: 50vw;
+    height: 100%;
+    text-align: center;
+}
+
+.right{
+    width: 50vw;
+    height: 100%;
+    text-align: center;
+}
+
+.input_and_btn{
+
+    /* background-color: rgb(161, 127, 255); */
+}
+
+input{
+    width: 20vw;
+    height: 2vh;
+    border: 0.125em, solid;
+    vertical-align: middle;
+}
+
+
+/* CSS */
+button {
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+  font-size: 100%;
+  height: 40px;
+  line-height: 1.15;
+
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 10%;
+  vertical-align: middle;
+}

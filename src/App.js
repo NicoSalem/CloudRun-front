@@ -10,6 +10,8 @@ function App() {
   const [dbEntries, setDbEntries] = useState([])
   const [redis_messageList, set_redis_messageList] = useState([])
 
+  const [inputData, setInputData] = useState()
+
   const handleClick =  async () => {
     var db = await basicFetch("https://cloud-sql-microservice-svuotfutja-uk.a.run.app/db");
     var msgs = await basicFetch("https://pubsub-microservice-svuotfutja-uk.a.run.app/pmsgs");
@@ -29,22 +31,66 @@ function App() {
     // await basicPost("https://cloudrun-cicd1-back-svuotfutja-ue.a.run.app/get-pubsub-msgs2");
   }
 
+  function getInputData(value){
+    setInputData(value.target.value)
+  }
+
+  const basicPost = async (endpoint) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': '$(gcloud auth application-default print-access-token)' },
+      body: JSON.stringify({
+        "messages": [
+            {
+                "data":  inputData,
+            }
+        ]
+      })
+    };
+    fetch(endpoint, requestOptions)
+  }
+
+  const basicFetch = async (endpoint) => {
+    const req = await fetch(endpoint);
+    const json = req.json();
+    return json;
+  }
+
   return (
     <div className="App">
-      <h1>Hello from the front end</h1>
-      <button onClick={handleClick}>retrieve db entreis and pub sub messages</button>
-      <br></br><br></br>
-      <button onClick={btn_send_pubsub}>send Pub sub message</button>
-      <h3>Db entries</h3>
+
+      <div className='introduction'>
+        <h1>Hello from the front end</h1>
+        <button onClick={handleClick}>get messages</button>
+        <br></br><br></br>
+
+        <div className='input_and_btn'>
+          <input type='text' onChange={getInputData}></input>
+          <button onClick={btn_send_pubsub}>send message</button>
+        </div>
+        
+      </div>
+      
+      <div className='mainSection'>
+        <div className='left'>
+            <h3>Pub sub messages</h3>
+              {messageList.map(entry => {
+                return <p> {JSON.stringify(entry)} </p>
+              })}
+        </div>
+
+        <div className='right'>
+          <h3>Pub sub messages - from REDIS</h3>
+          <p>{ redis_messageList }</p>
+        </div>
+
+      </div>
+      {/* <h3>Db entries</h3>
       {dbEntries.map(entry => {
         return <p> {JSON.stringify(entry)} </p>
-      })}
-      <h3>Pub sub messages</h3>
-      {messageList.map(entry => {
-        return <p> {JSON.stringify(entry)} </p>
-      })}
-      <h3>Pub sub messages - from REDIS</h3>
-      <p>{ redis_messageList }</p>
+      })} */}
+      
+      
     </div>
   );
 }
@@ -53,11 +99,7 @@ export default App;
 
 
 
-const basicFetch = async (endpoint) => {
-  const req = await fetch(endpoint);
-  const json = req.json();
-  return json;
-}
+
 
 
 // TODO
@@ -65,20 +107,7 @@ const basicFetch = async (endpoint) => {
 // EASIER IN TERMS OF AUTHENTICATION.
 // link https://cloud.google.com/pubsub/docs/publisher#node.js
 
-const basicPost = async (endpoint) => {
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': '$(gcloud auth application-default print-access-token)' },
-    body: JSON.stringify({
-      "messages": [
-          {
-              "data":  Buffer.from("hello from react pubsub").toString('base64'),
-          }
-      ]
-    })
-  };
-  fetch(endpoint, requestOptions)
-}
+
 
 
 /**
