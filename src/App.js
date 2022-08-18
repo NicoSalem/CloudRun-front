@@ -29,6 +29,7 @@ function App() {
   const btn_send_pubsub =  async () => {
     await basicPost("https://pubsub-microservice-svuotfutja-uk.a.run.app/send-pubsub-msg-from-backend");
     // await basicPost("https://cloudrun-cicd1-back-svuotfutja-ue.a.run.app/get-pubsub-msgs2");
+    await handleClick();
   }
 
   function getInputData(value){
@@ -61,13 +62,16 @@ function App() {
 
       <div className='introduction'>
         <h1>Hello from the front end</h1>
-        <button onClick={handleClick}>get messages</button>
         <br></br><br></br>
 
         <div className='input_and_btn'>
           <input type='text' onChange={getInputData}></input>
-          <button onClick={btn_send_pubsub}>send message</button>
+          <button onClick={btn_send_pubsub}>send
+          </button>
+         
         </div>
+        <button className='get-messages-btn' onClick={handleClick}>get messages</button>
+        
         
       </div>
       
@@ -75,13 +79,15 @@ function App() {
         <div className='left'>
             <h3>Pub sub messages</h3>
               {messageList.map(entry => {
-                return <p> {JSON.stringify(entry)} </p>
+                return <p> {entry} </p>
               })}
         </div>
 
         <div className='right'>
           <h3>Pub sub messages - from REDIS</h3>
-          <p>{ redis_messageList }</p>
+          { redis_messageList.map(entry => {
+                return <p> {entry} </p>
+              })}
         </div>
 
       </div>

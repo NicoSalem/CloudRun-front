@@ -19,17 +19,18 @@
     height: 100%;
     text-align: center;
 }
-
+/* 
 .input_and_btn{
-
-    /* background-color: rgb(161, 127, 255); */
-}
+    display: block;
+    background-color: rgb(161, 127, 255);
+} */
 
 input{
     width: 20vw;
-    height: 2vh;
+    height: 40px;
     border: 0.125em, solid;
     vertical-align: middle;
+    border-radius: 6px;
 }
 
 
@@ -51,7 +52,7 @@ button {
 
   outline: none;
   overflow: hidden;
-  padding: 0 25px;
+
   position: relative;
   text-align: center;
   text-transform: none;
@@ -62,4 +63,12 @@ button {
   touch-action: manipulation;
   width: 10%;
   vertical-align: middle;
+  text-align: center;
+}
+
+.get-messages-btn{
+    width: 30vw;
+    vertical-align: middle;
+    margin-top: 1vh;
+    margin-bottom: 3vh;
 }
